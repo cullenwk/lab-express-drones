@@ -4,17 +4,17 @@ const DroneModel = require('../models/Drone.model')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-    
     DroneModel.find()
-     .then((drones) => {
-        res.render("index", {drones});
-     })
+    .then((drones) => {
+
+      res.render("index.hbs", {drones});
+    })
     .catch(() => {
-        next('Drones could not find') 
-     })
-    
-    
+      next('Drone find failed')
+    })
 
 });
+    
+    
 
 module.exports = router;

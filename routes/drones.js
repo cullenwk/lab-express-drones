@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/drones', (req, res, next) => {
   // Iteration #2: List the drones
+  
   DroneModel.find()
   .then((drones) => {
     res.render("drone/list.hbs" ,{drones})
@@ -24,7 +25,7 @@ router.get('/drones/create', (req, res, next) => {
 
 router.post('/drones/create', (req, res, next) => {
   // Iteration #3: Add a new drone
-  console.log(req.body)
+    console.log(req.body)
     const {name, propellers, maxSpeed} = req.body
 
     DroneModel.create({name, propellers, maxSpeed})
@@ -53,20 +54,6 @@ router.get('/drones/:droneId/edit', (req, res, next) => {
             next('Single drone fetch failed')
         })
 });
-
-router.get('/drones/:droneId/edit', (req, res, next) => {
-  const {droneId} = req.params
-
-  DroneModel.findById(droneId)
-      .then((drone) => {
-          //render some HBS file with that drone information
-          res.render('drones/update-form.hbs', {drone})
-      })
-      .catch(() => {
-          next('Single drone fetch failed')
-      })
-
-})
 
 
 router.post('/drones/:droneId/edit', (req, res, next) => {
